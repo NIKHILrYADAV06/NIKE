@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { clerkMiddleware } from "@clerk/express";
+import { arcjetMiddleware } from "./middleware/arcjet.middleware.js";
 
 import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
@@ -8,17 +9,25 @@ import { connectDB } from "./config/db.js";
 import UserRoutes from "./routes/user.routes.js";
 import PostsRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
+import notificationRoutes from "./routes/notification.routes.js";
 
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use(clerkMiddleware());
+app.use(arcjetMiddleware())
 
 app.use('/api/users', UserRoutes);
 app.use('/api/posts', PostsRoutes);
-app.use('/api/auth', commentRoutes);
+app.use('/api/comments', commentRoutes);
+app.use('/api/notifications', notificationRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 
 app.use((err, req, res, next) => {
