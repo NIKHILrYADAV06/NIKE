@@ -6,7 +6,7 @@ import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 
 import UserRoutes from "./routes/user.routes.js";
-import PostsRoutes from "./routes/posts.routes.js";
+import PostsRoutes from "./routes/post.routes.js";
 
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(clerkMiddleware());
 
 app.use('/api/users', UserRoutes);
-app.use("/api/posts", PostsRoutes);
+app.use('/api/posts', PostsRoutes);
 
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
