@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(clerkMiddleware());
-app.use(arcjetMiddleware())
+app.use(arcjetMiddleware)
 
 app.use('/api/users', UserRoutes);
 app.use('/api/posts', PostsRoutes);
@@ -38,12 +38,16 @@ app.use((err, req, res, next) => {
 const startServer = async () => {
     try {
         await connectDB();
-        app.listen(ENV.PORT, () => {
-            console.log(`Server started on port ${ENV.PORT}`);
-        });
+        if (ENV.NODE_ENV !== "production") {
+            app.listen(ENV.PORT, () => {
+                console.log(`Server started on port ${ENV.PORT}`);
+            });
+        }
     } catch (error) {
         console.log(error);
     }
 };
 
 startServer();
+
+export default app;
