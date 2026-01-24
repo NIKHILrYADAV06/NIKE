@@ -5,7 +5,7 @@ import { useSocialAuth } from "@/hooks/useSocialAuth";
 export default function Index() {
   const { handleSocialAuth, isLoading } = useSocialAuth();
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-[#0F1A24]">
       <View className="flex-1 px-8 justify-between">
         <View className="flex-1 justify-center">
           {/* DEMO IMAGE */}
